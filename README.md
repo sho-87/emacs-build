@@ -2,12 +2,40 @@
 
 Scripts to build a distribution of Emacs from sources, using MSYS2 and Mingw64(32)
 
+Forked from [kiennq/emacs-build](https://github.com/kiennq/emacs-build/tree/main)
+
+The releases in this repo are built with the following options:
+
+```
+.\emacs-build.cmd --nativecomp --clone --branch emacs-29 --slim --without-lcms2 --without-xpm --with-rsvg --build --pack-all
+
+---
+
+Compressed installation: yes
+Strip executables: yes
+Emacs features:
+  --with-rsvg
+  --with-gif
+  --with-gnutls
+  --with-harfbuzz
+  --with-jpeg
+  --with-json
+  --with-png
+  --with-tree-sitter
+  --with-xml2
+  --with-zlib
+ --without xpm
+ --without tiff
+ --without lcms2
+ --without cairo
+```
+
 ## Rationale
 
 I wanted a script to build Emacs from sources, package it and install it on
 different computers, with the following conditions
 
-- I should be able to build any branch or release from Emacs. This includes the last release branch (right now emacs-27), as well as the master branch for development. Always using pristine sources from Savannah.
+- I should be able to build any branch or release from Emacs. This includes the last release branch, as well as the master branch for development. Always using pristine sources from Savannah.
 - I want to build emacs with different options from the default, which is to use all features available. For instance, I do not care for SVG support.
 - The script needs to track all packages that are required by the Emacs build even if I change the build options.
 - The installation should take as little space as possible, removing useless directories or files that come from the dependencies. For instance, headers from libraries used by emacs, spurious documentation files, etc.
