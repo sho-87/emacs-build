@@ -43,7 +43,7 @@ jobs:
 
       - name: Read Target Branch
         id: read-branch
-        run: echo "::set-output name=branch::$(cat target-branch.txt)"
+        run: echo "TARGET_BRANCH=$(cat target-branch.txt)" >> $GITHUB_ENV
 
       - name: Setup Msys2
         uses: msys2/setup-msys2@v2
@@ -59,7 +59,7 @@ jobs:
         run: |
           mkdir -p ./git/emacs
           cd ./git/emacs/
-          git clone --branch ${{ steps.read-branch.outputs.branch }} --single-branch --depth 1 $EMACS_REPO .
+          git clone --branch $TARGET_BRANCH --single-branch --depth 1 $EMACS_REPO .
           echo "EMACS_COMMIT=`date +'%Y%m%d'`.`git rev-parse --short=7 HEAD`" >> $GITHUB_ENV
           echo "EMACS_MAJOR_VER=`cat configure.ac | grep -Po 'AC_INIT\(.*\[\K\d+'`" >> $GITHUB_ENV
 
