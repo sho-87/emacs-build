@@ -4,10 +4,10 @@ Scripts to build a distribution of Emacs from sources, using MSYS2 and Mingw64(3
 
 Forked from [kiennq/emacs-build](https://github.com/kiennq/emacs-build/tree/main)
 
-The releases in this repo are built with the following options:
+The releases in this repo are built with the following options. The target branch to build is located in the `target-branch.txt` file.
 
 ```
-.\emacs-build.cmd --nativecomp --clone --branch emacs-29 --slim --without-lcms2 --without-xpm --with-rsvg --build --pack-all
+.\emacs-build.cmd --nativecomp --clone --branch <target-branch> --slim --without-lcms2 --without-xpm --with-rsvg --build --pack-all
 
 ---
 
@@ -123,7 +123,7 @@ It will take care of the following tasks
 
 1. Download the latest release of MSYS
 2. Download a minimal set of MSYS and MINGW programs needed to build Emacs and the extensions
-3. Clone the latest emacs repository on the branch emacs-27
+3. Clone the latest emacs repository on the target branch
 4. Ensure that all required packages Mingw64 are installed, or install them.
 5. Configure and build Emacs using those packages
 6. Pack all the dependencies into a ZIP file.

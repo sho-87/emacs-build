@@ -29,7 +29,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       MSYS2_DIR: C:\msys64
-      EMACS_REPO: https://github.com/kiennq/emacs.git
+      EMACS_REPO: git://git.savannah.gnu.org/emacs.git
 
     defaults:
       run:
@@ -38,7 +38,12 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v3
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Read Target Branch
+        id: read-branch
+        run: echo "::set-output name=branch::$(cat target-branch.txt)"
 
       - name: Setup Msys2
         uses: msys2/setup-msys2@v2
@@ -48,16 +53,13 @@ jobs:
           release: false
 
       # This is the shortest job, but in this case it pulls all MSYS/MINGW64
-      - name: Clone Emacs
-        if: runner.os == 'Windows'
-        run: .\emacs-build.cmd --clone --repo https://github.com/kiennq/emacs.git --depth 1
 
       - name: Clone Emacs
         if: runner.os != 'Windows'
         run: |
           mkdir -p ./git/emacs
           cd ./git/emacs/
-          git clone --depth 1 $EMACS_REPO .
+          git clone --branch ${{ steps.read-branch.outputs.branch }} --single-branch --depth 1 $EMACS_REPO .
           echo "EMACS_COMMIT=`date +'%Y%m%d'`.`git rev-parse --short=7 HEAD`" >> $GITHUB_ENV
           echo "EMACS_MAJOR_VER=`cat configure.ac | grep -Po 'AC_INIT\(.*\[\K\d+'`" >> $GITHUB_ENV
 

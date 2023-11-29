@@ -1,4 +1,8 @@
 @echo off
+
+REM Read branch from target-branch.txt
+set /p EMACS_BRANCH=<target-branch.txt
+
 if x%1 == x goto default
 if %1 == --pack goto pack
 if %1 == --clean goto clean
@@ -9,11 +13,11 @@ if %1==-? goto help
 goto run
 
 :default
-emacs-build.cmd --nativecomp --clone --branch emacs-29 --slim --without-lcms2 --without-xpm --with-rsvg --build
+emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --slim --without-lcms2 --without-xpm --with-rsvg --build
 goto:eof
 
 :pack 
-emacs-build.cmd --nativecomp --clone --branch emacs-29 --slim --without-lcms2 --without-xpm --with-rsvg --pack-all
+emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --slim --without-lcms2 --without-xpm --with-rsvg --pack-all
 goto:eof
 
 :cleanall
