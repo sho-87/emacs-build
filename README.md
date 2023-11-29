@@ -1,5 +1,7 @@
 # emacs-build v0.4
 
+[![build](https://github.com/sho-87/emacs-build/actions/workflows/build.yml/badge.svg)](https://github.com/sho-87/emacs-build/actions/workflows/build.yml)
+
 Scripts to build a distribution of Emacs from sources, using MSYS2 and Mingw64(32)
 
 Forked from [kiennq/emacs-build](https://github.com/kiennq/emacs-build/tree/main)
@@ -29,6 +31,8 @@ Emacs features:
  --without lcms2
  --without cairo
 ```
+
+Branch names can be found in the [Emacs repository](https://git.savannah.gnu.org/cgit/emacs.git/refs/heads/).
 
 ## Rationale
 
