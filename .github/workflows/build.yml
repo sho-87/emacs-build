@@ -66,6 +66,7 @@ jobs:
       - name: Set package version
         run: |
           echo "EMACS_VER=${{ env.EMACS_MAJOR_VER }}.${{ github.run_number }}.${{ env.EMACS_COMMIT }}" >> $GITHUB_ENV
+          echo "RELEASE_TAG=${{ env.TARGET_BRANCH }}.${{ github.run_number }}.$(date +'%Y%m%d')" >> $GITHUB_ENV
         shell: bash
 
       - name: Build Emacs
@@ -98,7 +99,7 @@ jobs:
           if-no-files-found: error
 
     outputs:
-      version: ${{ env.EMACS_VER }}
+      version: ${{ env.RELEASE_TAG }}
 
   publish:
     needs: build
@@ -115,8 +116,8 @@ jobs:
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v${{ needs.build.outputs.version }}
-          name: emacs_${{ needs.build.outputs.version }}
+          tag_name: ${{ needs.build.outputs.version }}
+          name: ${{ needs.build.outputs.version }}
           prerelease: false
           files: |
             *-full.zip
