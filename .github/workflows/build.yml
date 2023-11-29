@@ -44,6 +44,7 @@ jobs:
       - name: Read Target Branch
         id: read-branch
         run: echo "TARGET_BRANCH=$(cat target-branch.txt)" >> $GITHUB_ENV
+        shell: bash
 
       - name: Setup Msys2
         uses: msys2/setup-msys2@v2
