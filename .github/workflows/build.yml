@@ -16,7 +16,7 @@ jobs:
     # Matrix strategy from
     # https://github.com/msys2/MINGW-packages/blob/master/.github/workflows/main.yml
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         include:
           - os: windows-latest
@@ -24,7 +24,7 @@ jobs:
             arch: x86_64
           - os: ubuntu-latest
             shell: bash
-
+    timeout-minutes: 180
     # The type of runner that the job will run on
     runs-on: ${{ matrix.os }}
     env:
@@ -72,13 +72,14 @@ jobs:
 
       - name: Build Emacs
         if: runner.os == 'Windows'
+        timeout-minutes: 60
         uses: Wandalen/wretry.action@master
         with:
           # Require --nativecomp and --with-* flags, else the deps will not be included properly
           command: |
             .\emacs-build.cmd
           attempt_limit: 5
-          attempt_delay: 2000
+          attempt_delay: 20000
 
       - name: Package Emacs
         if: runner.os == 'Windows'
