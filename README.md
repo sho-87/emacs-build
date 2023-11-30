@@ -9,27 +9,27 @@ Forked from [kiennq/emacs-build](https://github.com/kiennq/emacs-build/tree/main
 The releases in this repo are built with the following options. The target branch to build is located in the `target-branch.txt` file.
 
 ```
-.\emacs-build.cmd --nativecomp --clone --branch <target-branch> --slim --without-lcms2 --without-xpm --with-rsvg --build --pack-all
+.\emacs-build.cmd --nativecomp --clone --branch <target-branch> --strip --compress --with-all --build --pack-all
 
 ---
 
 Compressed installation: yes
 Strip executables: yes
 Emacs features:
-  --with-rsvg
+  --with-cairo
   --with-gif
   --with-gnutls
   --with-harfbuzz
   --with-jpeg
   --with-json
+  --with-lcms2
   --with-png
+  --with-rsvg
+  --with-tiff
   --with-tree-sitter
   --with-xml2
+  --with-xpm
   --with-zlib
- --without xpm
- --without tiff
- --without lcms2
- --without cairo
 ```
 
 Branch names can be found in the [Emacs repository](https://git.savannah.gnu.org/cgit/emacs.git/refs/heads/).

@@ -13,11 +13,11 @@ if %1==-? goto help
 goto run
 
 :default
-emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --slim --without-lcms2 --without-xpm --with-rsvg --build
+emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --strip --compress --with-all --build
 goto:eof
 
 :pack 
-emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --slim --without-lcms2 --without-xpm --with-rsvg --pack-all
+emacs-build.cmd --nativecomp --clone --branch %EMACS_BRANCH% --strip --compress --with-all --pack-all
 goto:eof
 
 :cleanall
