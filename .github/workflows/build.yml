@@ -88,9 +88,9 @@ jobs:
       - name: Build and pack Emacs
         if: runner.os != 'Windows'
         run: |
-          chmod 755 ./emacs-build-unix.sh
+          chmod 755 ./emacs-build-deb.sh
           mkdir -p ./zips
-          ./emacs-build-unix.sh -s ./git/emacs/ -v ${{ env.EMACS_VER }} -d ./zips
+          ./emacs-build-deb.sh -s ./git/emacs/ -v ${{ env.EMACS_VER }} -d ./zips
 
       # Upload everything
       - name: Upload binaries
